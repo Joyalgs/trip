@@ -1,384 +1,813 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cape Breton 3-Day Road Trip Itinerary</title>
-    <style>
-        :root {
-            --primary: #1e293b;
-            --secondary: #0284c7;
-            --accent: #0ea5e9;
-            --bg: #f1f5f9;
-            --card-bg: #ffffff;
-            --text: #334155;
-            --text-light: #64748b;
-            --border: #e2e8f0;
-            --success: #15803d;
-            --success-bg: #f0fdf4;
-            --success-border: #bbf7d0;
-        }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            padding: 20px;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            background: white;
-            padding: 30px 20px;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            border: 1px solid var(--border);
-        }
-        header h1 {
-            color: var(--primary);
-            margin-bottom: 8px;
-            font-size: 2.2rem;
-        }
-        header p {
-            color: var(--text-light);
-            font-size: 1.05rem;
-        }
-        .nav-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-        .tab-btn {
-            background: white;
-            border: 1px solid var(--border);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        .tab-btn:hover {
-            border-color: var(--secondary);
-            color: var(--secondary);
-        }
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        .day-section {
-            background: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            display: none;
-        }
-        .day-section.active {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .day-header {
-            background: var(--primary);
-            color: white;
-            padding: 18px 24px;
-            font-size: 1.25rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .timeline {
-            padding: 24px;
-        }
-        .event-card {
-            display: flex;
-            align-items: flex-start;
-            position: relative;
-            padding-bottom: 28px;
-            margin-left: 20px;
-            border-left: 2px solid #cbd5e1;
-        }
-        .event-card:last-child {
-            padding-bottom: 0;
-            border-left: 2px solid transparent;
-        }
-        .event-card::before {
-            content: '';
-            position: absolute;
-            left: -7px;
-            top: 4px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: 2px solid white;
-            box-shadow: 0 0 0 2px #cbd5e1;
-        }
-        .event-content {
-            margin-left: 20px;
-            flex-grow: 1;
-        }
-        .time-badge {
-            display: inline-block;
-            background: #e0f2fe;
-            color: #0369a1;
-            font-weight: 600;
-            font-size: 0.85rem;
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 6px;
-        }
-        .event-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 4px;
-        }
-        .event-desc {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: 10px;
-        }
-        .map-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            text-decoration: none;
-            font-weight: 500;
-            background: var(--success-bg);
-            color: var(--success);
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: 1px solid var(--success-border);
-            transition: background 0.2s;
-        }
-        .map-link:hover {
-            background: #dcfce7;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            padding: 20px;
-        }
-        @media (max-width: 600px) {
-            body { padding: 10px; }
-            header h1 { font-size: 1.7rem; }
-            .timeline { padding: 15px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabot Trail — Oct 10–12 Itinerary</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --ink: #1C2B2E;
+      --ink-soft: #44565A;
+      --paper: #ECE7DA;
+      --card: #FAF8F1;
+      --sea: #285C52;
+      --sea-dim: #DCE6E1;
+      --rust: #A85B2B;
+      --rust-dim: #F2E0D1;
+      --gold: #B4873D;
+      --gold-dim: #F0E4C9;
+      --line: #CBC2AC;
+      --danger: #8E3B2A;
+      --danger-bg: #F6E4DD;
+      --money: #3D6B4F;
+      --money-dim: #E2EBE3;
+      --radius-lg: 18px;
+      --radius-sm: 4px;
+      --maxw: 700px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+    h1, h2, h3 {
+      font-family: 'Spectral', Georgia, serif;
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    a {
+      color: inherit;
+    }
+    button {
+      font-family: inherit;
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 18px 80px;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 36px 18px 22px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-size: 13px;
+      color: var(--sea);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 40px);
+      line-height: 1.08;
+      color: var(--ink);
+    }
+    .hero .meta {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    .distance-strip {
+      margin-top: 22px;
+      display: flex;
+      gap: 3px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .distance-seg {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      transition: filter .15s ease, box-shadow .15s ease;
+      border: none;
+    }
+    .distance-seg:hover {
+      filter: brightness(1.08);
+    }
+    .distance-seg:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+    .distance-seg.active {
+      box-shadow: inset 0 0 0 2px var(--ink);
+      font-weight: 700;
+    }
+    .distance-seg[data-day="1"] { background: var(--sea); }
+    .distance-seg[data-day="2"] { background: var(--rust); }
+    .distance-seg[data-day="3"] { background: var(--gold); }
+    .distance-caption {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--ink-soft);
+    }
+
+    .spend-total {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+    .spend-total strong {
+      font-family: 'Spectral', serif;
+      font-size: 17px;
+      color: var(--money);
+      font-weight: 700;
+    }
+    .spend-total .fine {
+      display: block;
+      font-size: 11.5px;
+      color: var(--ink-soft);
+      margin-top: 2px;
+    }
+
+    /* ---------- DAY TABS ---------- */
+    .tabs {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--paper);
+      display: flex;
+      gap: 6px;
+      padding: 14px 18px 10px;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      border-bottom: 1px solid var(--line);
+    }
+    .tab {
+      flex: 1;
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      text-align: center;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .tab:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+    .tab.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    /* ---------- DAY PANEL ---------- */
+    .day-panel {
+      display: none;
+      padding-top: 20px;
+    }
+    .day-panel.active {
+      display: block;
+      animation: fadeUp .35s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .day-panel.active { animation: none; }
+    }
+
+    .day-head {
+      margin-bottom: 6px;
+    }
+    .day-head h2 {
+      font-size: 22px;
+    }
+    .day-head .sub {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-top: 3px;
+    }
+    .day-spend {
+      font-size: 13px;
+      color: var(--money);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .warning {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border-left: 3px solid var(--danger);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .warning strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* ---------- TIMELINE ---------- */
+    .timeline {
+      position: relative;
+      padding-left: 26px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: var(--line);
+    }
+    .stop {
+      position: relative;
+      margin-bottom: 22px;
+    }
+    .stop:last-child {
+      margin-bottom: 0;
+    }
+    .stop::before {
+      content: "";
+      position: absolute;
+      left: -26px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid var(--sea);
+    }
+    .stop[data-kind="drive"]::before {
+      border-color: var(--ink-soft);
+    }
+    .stop[data-kind="food"]::before {
+      border-color: var(--rust);
+      background: var(--rust);
+    }
+    .stop[data-kind="top"]::before {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .stop[data-kind="optional"]::before {
+      border-color: var(--line);
+      background: var(--paper);
+    }
+
+    .time-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Spectral', serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+    .leg {
+      font-size: 11px;
+      color: var(--ink-soft);
+      margin: 0 0 8px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .leg span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+    }
+    .stop[data-kind="drive"] .card {
+      background: transparent;
+      padding: 0;
+    }
+    .stop-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .stop-desc {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin: 0 0 8px;
+    }
+    .tag {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .tag.top { background: var(--gold-dim); color: var(--gold); }
+    .tag.food { background: var(--rust-dim); color: var(--rust); }
+    .tag.optional { background: var(--sea-dim); color: var(--sea); }
+    .tag.warn { background: var(--danger-bg); color: var(--danger); }
+
+    .cost-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--money);
+      background: var(--money-dim);
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    .maplinks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .maplinks a {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sea);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      border-bottom: 1px solid transparent;
+      transition: border-color .15s ease;
+    }
+    .maplinks a::before {
+      content: "↗";
+      margin-right: 4px;
+      font-size: 11px;
+    }
+    .maplinks a:hover,
+    .maplinks a:focus-visible {
+      border-color: var(--sea);
+    }
+    .maplinks a:focus-visible {
+      outline: 2px solid var(--sea);
+      outline-offset: 3px;
+    }
+
+    .optional-toggle-row {
+      margin: 4px 0 18px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .optional-toggle {
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 13px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .optional-toggle:hover {
+      background: var(--card);
+      color: var(--ink);
+    }
+    .optional-toggle:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+    body.hide-optional .stop[data-kind="optional"] {
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-soft);
+      padding: 28px 18px 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🚗 Cape Breton 3-Day Road Trip Itinerary</h1>
-            <p>Halifax • Antigonish • Sydney • Port Hawkesbury • Cabot Trail • Halifax</p>
-        </header>
 
-        <!-- Interactive Tab Navigation -->
-        <div class="nav-tabs">
-            <button class="tab-btn active" onclick="switchDay(1)">Day 1 (Oct 10)</button>
-            <button class="tab-btn" onclick="switchDay(2)">Day 2 (Oct 11 - Cabot Trail)</button>
-            <button class="tab-btn" onclick="switchDay(3)">Day 3 (Oct 12)</button>
-            <button class="tab-btn" onclick="switchDay('all')">View All Days</button>
+<div class="hero">
+  <div class="hero-eyebrow">Road trip</div>
+  <h1>Halifax to the Cabot Trail and back</h1>
+  <div class="meta">October 10–12 · 27 travelers · 7 families · 7 cars</div>
+
+  <div class="distance-strip" role="tablist" aria-label="Jump to day by distance">
+    <button class="distance-seg active" data-day="1" style="flex:400" role="tab" aria-selected="true">Day 1 · 400 km</button>
+    <button class="distance-seg" data-day="2" style="flex:470" role="tab" aria-selected="false">Day 2 · 470 km</button>
+    <button class="distance-seg" data-day="3" style="flex:260" role="tab" aria-selected="false">Day 3 · 260 km</button>
+  </div>
+  <div class="distance-caption"><span>Antigonish &amp; Sydney</span><span>The full loop</span><span>Home</span></div>
+
+  <div class="spend-total">
+    Estimated spending, per family of 3–4 <strong>~$195–365</strong>
+    <span class="fine">Core costs across all 3 days — optional extras (museums, whale watching) priced separately below</span>
+  </div>
+</div>
+
+<div class="tabs" role="tablist" aria-label="Select day">
+  <button class="tab active" data-day="1" role="tab" aria-selected="true" aria-controls="day-1">Day 1 · Oct 10</button>
+  <button class="tab" data-day="2" role="tab" aria-selected="false" aria-controls="day-2">Day 2 · Oct 11</button>
+  <button class="tab" data-day="3" role="tab" aria-selected="false" aria-controls="day-3">Day 3 · Oct 12</button>
+</div>
+
+<div class="wrap">
+
+  <!-- DAY 1 -->
+  <section class="day-panel active" id="day-1" role="tabpanel" aria-label="Day 1 itinerary">
+    <div class="day-head">
+      <h2>Halifax → Antigonish → Sydney → Port Hawkesbury</h2>
+      <div class="sub">Leave home 9:30–10:00am · ~400 km total</div>
+    </div>
+    <div class="day-spend">~$30–60 per family today</div>
+
+    <div class="timeline">
+
+      <div class="stop" data-kind="drive">
+        <div class="time-badge">🕐 9:45am</div>
+        <div class="leg"><span>🚗 ~165 km</span><span>~1h50m</span></div>
+        <div class="stop-title">Halifax → Beaver Mountain Provincial Park</div>
+        <p class="stop-desc">Leave home between 9:30–10am. Exit 30 off Hwy 104, about 20 minutes before Antigonish. Arrive ~11:35am.</p>
+      </div>
+
+      <div class="stop" data-kind="food">
+        <div class="card">
+          <div class="time-badge">🕐 11:35am – 12:30pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(55 min)</span></div>
+          <div class="stop-title">Lunch: Beaver Mountain Provincial Park</div>
+          <div class="cost-line">💰 Free per family — bring your own food</div>
+          <p class="stop-desc">Shaded picnic area with facilities on-site. Open through Oct 12, 2026 per parks.novascotia.ca.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Beaver+Mountain+Provincial+Park" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Beaver+Mountain+Provincial+Park" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
         </div>
+      </div>
 
-        <!-- Day 1 -->
-        <div class="day-section active" id="day-1">
-            <div class="day-header">
-                <span>Day 1: Oct 10 — Halifax → Antigonish → Sydney → Port Hawkesbury</span>
-            </div>
-            <div class="timeline">
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">9:30 AM – 10:00 AM</span>
-                        <div class="event-title">Start at Home</div>
-                        <div class="event-desc"></div>                        
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">11:45 AM – 12:45 PM</span>
-                        <div class="event-title">Lunch at Keppoch Mountain Clubhouse</div>
-                        <div class="event-desc">Antigonish — Picnic & washrooms (1 hr stop) 🥪</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Keppoch+Mountain+Clubhouse+Antigonish" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">2:30 PM – 4:00 PM</span>
-                        <div class="event-title">The Big Fiddle & Sydney Waterfront Boardwalk</div>
-                        <div class="event-desc">Sydney — Exploration & photos (1.5 hrs) 📸</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Sydney+Waterfront+Boardwalk+Big+Fiddle" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">5:10 PM</span>
-                        <div class="event-title">Port Hawkesbury Hotel Check-in</div>
-                        <div class="event-desc">Port Hawkesbury — Settle in for the evening 🏨</div>
-                        <a class="map-link" href="https://maps.app.goo.gl/4DPMcAxi2csTmd259" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-            </div>
+      <div class="stop" data-kind="drive">
+        <div class="time-badge">🕐 12:30pm</div>
+        <div class="leg"><span>🚗 150 km</span><span>~1h45m</span></div>
+        <div class="stop-title">Beaver Mountain → Sydney</div>
+        <p class="stop-desc">Depart ~12:30pm, arrive ~2:15pm.</p>
+      </div>
+
+      <div class="stop" data-kind="top">
+        <div class="card">
+          <div class="time-badge">🕐 2:15pm – 3:30pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(1h15m)</span></div>
+          <div class="stop-title">The Big Fiddle &amp; Sydney Waterfront Boardwalk <span class="tag top">Top attraction</span></div>
+          <div class="cost-line">💰 Free to visit · ~$30–60 per family for snacks or ice cream</div>
+          <p class="stop-desc">World's largest fiddle, 17 metres and 8 tons — a great group photo spot, plus a 0.75-mile harbourfront boardwalk.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=The+Big+Fiddle+Sydney+Nova+Scotia" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=The+Big+Fiddle+Sydney+Nova+Scotia" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
         </div>
+      </div>
 
-        <!-- Day 2 -->
-        <div class="day-section" id="day-2">
-            <div class="day-header">
-                <span>Day 2: Oct 11 — Full Cabot Trail Loop</span>
-            </div>
-            <div class="timeline">
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">8:00 AM – 8:30 AM</span>
-                        <div class="event-title">Quick Breakfast Stop at Tim Hortons / McDonald's</div>
-                        <div class="event-desc">Port Hawkesbury or Whycocomagh — Grab coffee & breakfast on the road (30 mins) ☕🍩</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Tim+Hortons+Port+Hawkesbury+Whycocomagh" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">11:35 AM – 12:00 PM</span>
-                        <div class="event-title">Cape Smokey Provincial Park Lookoff</div>
-                        <div class="event-desc">Cape Smokey — Coastal panorama & photo stop (25 mins) ⛰️📸</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Cape+Smokey+Provincial+Park" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">12:20 PM – 1:20 PM</span>
-                        <div class="event-title">Lunch at Coastal Restaurant & Pub</div>
-                        <div class="event-desc">Ingonish — #1 rated seafood & burgers (1 hr) 🦞🍔</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Coastal+Restaurant+and+Pub+Ingonish" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">3:30 PM – 5:30 PM</span>
-                        <div class="event-title">Skyline Trail Boardwalk Hike</div>
-                        <div class="event-desc">Cape Breton Highlands National Park — Cliff-edge ocean views (2 hrs) 🥾🌊</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Skyline+Trail+Cape+Breton+Highlands" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">5:45 PM – 6:10 PM</span>
-                        <div class="event-title">Pleasant Bay Viewpoint</div>
-                        <div class="event-desc">Pleasant Bay — Coastal views & whale-watching viewpoint (25 mins) 🐳</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Pleasant+Bay+Nova+Scotia" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">6:35 PM – 7:00 PM</span>
-                        <div class="event-title">Chéticamp Waterfront Walk</div>
-                        <div class="event-desc">Chéticamp — Acadian fishing village stroll (25 mins) ⚓</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Cheticamp+Waterfront" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">8:40 PM onward</span>
-                        <div class="event-title">Dinner near Port Hawkesbury Hotel</div>
-                        <div class="event-desc">Port Hawkesbury — Evening meal & rest 🍽️</div>
-                        <a class="map-link" href="https://maps.app.goo.gl/4DPMcAxi2csTmd259" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-            </div>
+      <div class="stop" data-kind="drive">
+        <div class="time-badge">🕐 3:30pm</div>
+        <div class="leg"><span>🚗 95 km</span><span>~1h10m</span></div>
+        <div class="stop-title">Sydney → Port Hawkesbury, check in</div>
+        <p class="stop-desc">Depart ~3:30pm, arrive at the hotel ~4:40pm.</p>
+        <div class="maplinks">
+          <a href="https://maps.google.com/?q=Olde+Brunswick+Inn+%26+Suites+Port+Hawkesbury" target="_blank" rel="noopener">Google Maps</a>
+          <a href="https://maps.apple.com/?q=Olde+Brunswick+Inn+%26+Suites+Port+Hawkesbury" target="_blank" rel="noopener">Apple Maps</a>
         </div>
+      </div>
 
-        <!-- Day 3 -->
-        <div class="day-section" id="day-3">
-            <div class="day-header">
-                <span>Day 3: Oct 12 — Port Hawkesbury → Halifax</span>
-            </div>
-            <div class="timeline">
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">11:00 AM</span>
-                        <div class="event-title">Hotel Checkout & Luggage Load</div>
-                        <div class="event-desc">Port Hawkesbury — Get ready for departure 🧳</div>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">11:05 AM – 11:35 AM</span>
-                        <div class="event-title">Strait Area Museum</div>
-                        <div class="event-desc">Port Hastings — Visitor Information Centre & local history (30 mins) 🏛️</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Strait+Area+Museum+Port+Hastings" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">11:50 AM – 12:05 PM</span>
-                        <div class="event-title">Aulds Cove Lookoff</div>
-                        <div class="event-desc">Aulds Cove — Quick photo stop overlooking Strait of Canso (15 mins) 📸</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Aulds+Cove+Nova+Scotia" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">12:45 PM – 1:45 PM</span>
-                        <div class="event-title">Lunch in Antigonish</div>
-                        <div class="event-desc">Antigonish — Halfway break before final stretch (1 hr) 🥪</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Antigonish+restaurants" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-                <div class="event-card">
-                    <div class="event-content">
-                        <span class="time-badge">3:30 PM</span>
-                        <div class="event-title">Arrive back in Halifax</div>
-                        <div class="event-desc">Halifax — End of trip 🚗🏡</div>
-                        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Halifax+Nova+Scotia" target="_blank">🗺️ Open in Google Maps</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+  </section>
 
-        <footer>
-            <p>Cape Breton Road Trip Itinerary</p>
-        </footer>
+  <!-- DAY 2 -->
+  <section class="day-panel" id="day-2" role="tabpanel" aria-label="Day 2 itinerary">
+    <div class="day-head">
+      <h2>The full Cabot Trail loop</h2>
+      <div class="sub">Depart hotel 8:00am sharp · ~470 km round trip</div>
+    </div>
+    <div class="day-spend">~$140–215 per family today (core) · optional add-ons priced below</div>
+
+    <div class="warning">
+      <strong>Start exactly at 8:00am.</strong>
+      This is the longest day of the trip, with dinner landing around 7:30pm. Treat Lakies Head, Green Cove, the lighthouse, Lone Shieling, and the salmon museum as flexible — Skyline Trail, lunch, and getting back safely matter more than hitting all five.
     </div>
 
-    <!-- Inline JavaScript for Tab Switching -->
-    <script>
-        function switchDay(day) {
-            const sections = document.querySelectorAll('.day-section');
-            sections.forEach(sec => sec.classList.remove('active'));
+    <div class="optional-toggle-row">
+      <button class="optional-toggle" type="button" aria-pressed="false">Hide "if time allows" stops</button>
+    </div>
 
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
+    <div class="timeline">
 
-            if (day === 'all') {
-                sections.forEach(sec => sec.classList.add('active'));
-                event.currentTarget.classList.add('active');
-            } else {
-                document.getElementById('day-' + day).classList.add('active');
-                event.currentTarget.classList.add('active');
-            }
-        }
-    </script>
+      <div class="stop" data-kind="drive">
+        <div class="time-badge">🕐 8:00am</div>
+        <div class="leg"><span>🚗 ~55 km</span><span>~40min</span></div>
+        <div class="stop-title">Depart hotel, Olde Brunswick Inn &amp; Suites</div>
+        <p class="stop-desc">Leave right at 8:00am — this is the day the whole trip hinges on.</p>
+      </div>
+
+      <div class="stop" data-kind="food">
+        <div class="card">
+          <div class="time-badge">🕐 8:40am – 9:15am <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(35 min)</span></div>
+          <div class="stop-title">Breakfast: Tim Hortons, Whycocomagh</div>
+          <div class="cost-line">💰 ~$20–35 per family</div>
+          <p class="stop-desc">Right on Hwy 105, roughly halfway to Baddeck — each car can order at its own pace. 35 minutes accounts for 7 families ordering.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Tim+Hortons+Whycocomagh" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Tim+Hortons+Whycocomagh" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="top">
+        <div class="card">
+          <div class="time-badge">🕐 10:45am – 11:10am <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(25 min)</span></div>
+          <div class="leg"><span>🚗 ~160 km from Whycocomagh</span><span>~1h30m</span></div>
+          <div class="stop-title">Cape Smokey Lookoff <span class="tag top">Top view</span></div>
+          <div class="cost-line">💰 Free</div>
+          <p class="stop-desc">A photo-and-stretch stop, not a hike — 25 minutes is enough to take in the view and get everyone back in the car.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Cape+Smokey+Lookoff" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Cape+Smokey+Lookoff" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="food">
+        <div class="card">
+          <div class="time-badge">🕐 11:45am – 12:45pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(1 hour)</span></div>
+          <div class="leg"><span>🚗 ~35 km</span><span>~35min</span></div>
+          <div class="stop-title">Lunch: Coastal Restaurant &amp; Pub, Ingonish</div>
+          <div class="cost-line">💰 ~$60–100 per family</div>
+          <p class="stop-desc">#1 rated in Ingonish — seafood and burgers, mains roughly $10–44 CAD per person. A full hour for a sit-down meal with 7 families.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Coastal+Restaurant+Pub+Ingonish" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Coastal+Restaurant+Pub+Ingonish" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="optional">
+        <div class="card">
+          <div class="time-badge">🕐 12:45pm – 1:00pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(15 min)</span></div>
+          <div class="stop-title">Lakies Head Lookoff <span class="tag optional">If time allows</span></div>
+          <div class="cost-line">💰 Free</div>
+          <p class="stop-desc">Quick roadside lookoff just north of Ingonish.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Lakies+Head+Lookoff+Cape+Breton" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Lakies+Head+Lookoff+Cape+Breton" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="optional">
+        <div class="card">
+          <div class="time-badge">🕐 1:00pm – 1:20pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(20 min)</span></div>
+          <div class="stop-title">Green Cove <span class="tag optional">If time allows</span></div>
+          <div class="cost-line">💰 Free</div>
+          <p class="stop-desc">Short boardwalk loop over pink granite coastline.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Green+Cove+Cape+Breton+Highlands" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Green+Cove+Cape+Breton+Highlands" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="optional">
+        <div class="card">
+          <div class="time-badge">🕐 1:20pm – 1:40pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(20 min)</span></div>
+          <div class="stop-title">Neils Harbour Lighthouse <span class="tag optional">If time allows</span></div>
+          <div class="cost-line">💰 Free to visit · ~$20–30 per family for ice cream</div>
+          <p class="stop-desc">Working fishing village — the old lighthouse is now an ice cream shop.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Neils+Harbour+Lighthouse" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Neils+Harbour+Lighthouse" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="optional">
+        <div class="card">
+          <div class="time-badge">🕐 1:40pm – 2:05pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(25 min)</span></div>
+          <div class="stop-title">Lone Shieling <span class="tag optional">If time allows</span></div>
+          <div class="cost-line">💰 Free (park pass required to enter)</div>
+          <p class="stop-desc">Easy 15-minute loop through old-growth maple to a replica Scottish crofter's hut.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Lone+Shieling+Cape+Breton+Highlands" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Lone+Shieling+Cape+Breton+Highlands" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="top">
+        <div class="card">
+          <div class="time-badge">🕐 2:05pm – 3:20pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(1h15m)</span></div>
+          <div class="stop-title">Skyline Trail <span class="tag warn">Needs parking reservation</span></div>
+          <div class="cost-line">💰 ~$25–34 park pass + $13–15 parking ≈ $40–50 per family</div>
+          <p class="stop-desc">The signature boardwalk hike, ending in a cliff-edge ocean view. 7 parking reservations needed for the same timeslot — book before leaving home, there's no signal at the trailhead. 1h15m covers parking, the walk out, and the walk back.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Skyline+Trail+Cape+Breton+Highlands" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Skyline+Trail+Cape+Breton+Highlands" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="optional">
+        <div class="card">
+          <div class="time-badge">🕐 3:45pm – 4:00pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(15 min)</span></div>
+          <div class="stop-title">Pleasant Bay <span class="tag optional">Family favorite</span></div>
+          <div class="cost-line">💰 Free to stop · whale watching ~$165–260 per family if time allows</div>
+          <p class="stop-desc">Whale watching boat tours depart here, but with this schedule there's only time for a quick stop, not a full tour.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Pleasant+Bay+Nova+Scotia" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Pleasant+Bay+Nova+Scotia" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="top">
+        <div class="card">
+          <div class="time-badge">🕐 4:25pm – 4:50pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(25 min)</span></div>
+          <div class="stop-title">Chéticamp <span class="tag top">Top village</span></div>
+          <div class="cost-line">💰 Free to walk around</div>
+          <p class="stop-desc">Acadian fishing village, worth a short walk on the waterfront.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Cheticamp+Nova+Scotia" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Cheticamp+Nova+Scotia" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="optional">
+        <div class="card">
+          <div class="time-badge">🕐 5:20pm – 5:40pm <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(20 min)</span></div>
+          <div class="stop-title">Margaree Salmon Museum <span class="tag optional">If time allows</span></div>
+          <div class="cost-line">💰 ~$20–30 per family admission (confirm on site)</div>
+          <p class="stop-desc">Quick stop via Margaree Forks on the way back.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Margaree+Salmon+Museum" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Margaree+Salmon+Museum" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="drive">
+        <div class="time-badge">🕐 5:40pm</div>
+        <div class="leg"><span>🚗 ~100 km via Trunk 19</span><span>~1h20m</span></div>
+        <div class="stop-title">Margaree Forks → Port Hawkesbury</div>
+        <p class="stop-desc">Direct route home, skips backtracking through Baddeck. Arrive ~7:00pm.</p>
+      </div>
+
+      <div class="stop" data-kind="food">
+        <div class="card">
+          <div class="time-badge">🕐 7:30pm</div>
+          <div class="stop-title">Dinner: Naan Stop – Spice by the Port <span class="tag top">4.8★</span></div>
+          <div class="cost-line">💰 ~$70–100 per family</div>
+          <p class="stop-desc">Indian restaurant at the Causeway Shopping Centre, Port Hawkesbury — butter chicken, tikka masala, 5 veg options. Call ahead for a party of 27.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Naan+Stop+Port+Hawkesbury" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Naan+Stop+Port+Hawkesbury" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="day-panel" id="day-3" role="tabpanel" aria-label="Day 3 itinerary">
+    <div class="day-head">
+      <h2>Port Hawkesbury → Halifax</h2>
+      <div class="sub">Checkout 11:00am</div>
+    </div>
+    <div class="day-spend">~$0–20 per family today (optional museum stop only)</div>
+
+    <div class="optional-toggle-row">
+      <button class="optional-toggle" type="button" aria-pressed="false">Hide "if time allows" stops</button>
+    </div>
+
+    <div class="timeline">
+
+      <div class="stop" data-kind="optional">
+        <div class="card">
+          <div class="time-badge">🕐 11:05am – 11:25am <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(20 min)</span></div>
+          <div class="stop-title">Port Hastings Museum &amp; Pioneer Cemetery <span class="tag optional">If time allows</span></div>
+          <div class="cost-line">💰 ~$15–20 per family, confirm on arrival</div>
+          <p class="stop-desc">5 minutes from the hotel — a quick, easy stop right after checkout.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Port+Hastings+Museum" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Port+Hastings+Museum" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="optional">
+        <div class="card">
+          <div class="time-badge">🕐 11:40am – 11:55am <span style="font-weight:400;font-size:12px;color:var(--ink-soft)">(15 min)</span></div>
+          <div class="stop-title">Auld's Cove Lookoff <span class="tag optional">If time allows</span></div>
+          <div class="cost-line">💰 Free</div>
+          <p class="stop-desc">Quick photo stop overlooking the Strait of Canso.</p>
+          <div class="maplinks">
+            <a href="https://maps.google.com/?q=Auld%27s+Cove+Lookoff" target="_blank" rel="noopener">Google Maps</a>
+            <a href="https://maps.apple.com/?q=Auld%27s+Cove+Lookoff" target="_blank" rel="noopener">Apple Maps</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="stop" data-kind="drive">
+        <div class="time-badge">🕐 11:55am</div>
+        <div class="leg"><span>🚗 260 km</span><span>~2h45m</span></div>
+        <div class="stop-title">Drive to Halifax</div>
+        <p class="stop-desc">A relaxed final leg — arrive ~2:40pm.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>Cabot Trail loop · October 10–12 · tap any map link to open directions</footer>
+
+<script>
+(function() {
+  var panels = document.querySelectorAll('.day-panel');
+  var tabs = document.querySelectorAll('.tab');
+  var segs = document.querySelectorAll('.distance-seg');
+  var dayButtons = document.querySelectorAll('.tab, .distance-seg');
+  var tabsContainer = document.querySelector('.tabs');
+
+  function setDay(day, shouldScroll) {
+    panels.forEach(function(p) {
+      p.classList.toggle('active', p.id === 'day-' + day);
+    });
+
+    tabs.forEach(function(t) {
+      var on = t.getAttribute('data-day') === day;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+
+    segs.forEach(function(s) {
+      var on = s.getAttribute('data-day') === day;
+      s.classList.toggle('active', on);
+      s.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+
+    if (shouldScroll && tabsContainer) {
+      var rect = tabsContainer.getBoundingClientRect();
+      // If user has scrolled down past tabs or clicked from hero distance segment, align to tabs
+      if (rect.top < 0 || window.scrollY > tabsContainer.offsetTop) {
+        tabsContainer.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
+  dayButtons.forEach(function(el) {
+    el.addEventListener('click', function() {
+      var day = el.getAttribute('data-day');
+      var isFromStrip = el.classList.contains('distance-seg');
+      setDay(day, true);
+    });
+  });
+
+  var toggleBtns = document.querySelectorAll('.optional-toggle');
+  toggleBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var hidden = document.body.classList.toggle('hide-optional');
+      toggleBtns.forEach(function(b) {
+        b.textContent = hidden ? 'Show "if time allows" stops' : 'Hide "if time allows" stops';
+        b.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+      });
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
